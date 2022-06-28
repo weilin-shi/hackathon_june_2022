@@ -18,7 +18,7 @@ code {
 
 @layer components {
   .button {
-    @apply py-0.5 px-4 bg-slate-50 rounded border border-slate-300 hover:bg-slate-200 disabled:border-slate-400 disabled:text-slate-300;
+    @apply py-0.5 px-4 bg-slate-50 rounded border border-slate-300 disabled:border-slate-400 hover:bg-slate-200 disabled:text-slate-300;
   }
 }
 
