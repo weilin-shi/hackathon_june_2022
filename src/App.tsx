@@ -56,7 +56,7 @@ function App() {
           )}
         </div>
         <div className="text-center">
-          <h3 className="mb-4">Final Effect</h3>
+          <h3 className="mb-4">Effect Preview</h3>
           {videoSRC && (
             <div className="grid grid-cols-3 grid-rows-3">
               {!videoVis && <Carousel images={images} />}
@@ -89,7 +89,7 @@ function App() {
       </div>
       <div className="">
         <div className="mt-10 p-2 rounded-lg bg-slate-50">
-          {images.length > 0 && <h3 className="my-4">Image Preview:</h3>}
+          {images.length > 0 && <h3 className="my-4">Thumbnails:</h3>}
           <div className="flex">
             {images.map((src) => (
               <div key={src} className="border border-2 mb-2 mr-2">
