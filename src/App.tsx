@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import axios from "axios";
+import Carousel from "./carousel";
 
 const baseURL =
   "http://a9f15b20f9fca46e2b655ffd55f6be3d-914171737.us-west-2.elb.amazonaws.com:7700/thumbnail?token=";
@@ -15,10 +16,6 @@ function App() {
   const [tapToPlay, setTapToPlay] = useState(true);
   const [videoVis, setVideoVis] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  let imgSrc = "";
-  if (images.length > 0) {
-    imgSrc = images[images.length - 1];
-  }
 
   return (
     <div className="flex justify-center">
@@ -32,10 +29,12 @@ function App() {
             placeholder="Video Link"
           />
           <button
-            className="button ml-4"
+            className="button ml-4 font-bold"
             disabled={input.trim() === ""}
             onClick={() => {
               setVideoSrc(input);
+              setVideoVis(true);
+              setTapToPlay(true);
               setInput("");
               const uri = `${baseURL}${btoa(input)}${tailURL}`;
               axios
@@ -53,7 +52,9 @@ function App() {
         </div>
         {videoSRC && (
           <div className="grid grid-cols-3 grid-rows-3">
-            <img src={imgSrc} className="endcard" alt="logo" />
+            {!videoVis && (
+              <Carousel images={images} />
+            )}
             {videoVis && (
               <video
                 ref={videoRef}
@@ -91,10 +92,10 @@ function App() {
             />
             {`${muted ? "Unmute" : "Mute"} Video`}
           </label>
-            <h3 className="my-4">Image Preview:</h3>
-          <div className="flex">
-            {images.map(src => (
-              <div key={src} className="mr-2 mb-2 ring-1">
+          <h3 className="my-4">Image Preview:</h3>
+          <div className="max-h-80 overflow-auto">
+            {images.map((src) => (
+              <div key={src} className="border border-2 mb-2">
                 <img src={src} alt="image preview" />
               </div>
             ))}
